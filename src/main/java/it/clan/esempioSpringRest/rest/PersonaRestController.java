@@ -62,6 +62,19 @@ public class PersonaRestController {
 		}
 	}
 	
+	@GetMapping("/getById2/{id}")
+	public ResponseEntity<Persona> getById2(@PathVariable("id") Integer id) {
+		// metodo aggiunto per esempio commit su Git
+		try {
+			Persona p = findById(id);
+			HttpStatus status = p!=null ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+			return new ResponseEntity<Persona>(p, status);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Persona>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@GetMapping("/getById/{id}/{nome}")
 	public ResponseEntity<Persona> getByIdNome(@PathVariable("id") Integer id,@PathVariable("nome") String nome){
 		try {
